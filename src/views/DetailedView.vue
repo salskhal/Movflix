@@ -1,55 +1,48 @@
 <template>
-  <div class="image grid md:grid-cols-2 gap-6 px-16 py-12">
-    <!-- Image side -->
-    <div class="relative">
-      <img :src="imagePath + movieDets.poster_path" alt="" />
-      <div
-        class="p-5 bg-[#49494a] text-white absolute top-8 left-[-40px] flex flex-col justify-center items-center rounded-lg gap-3"
-      >
-        <h3 class="font-semibold text-2xl">
-          {{ dates[2] }}
-        </h3>
-        <div class="w-[20px] h-[2px] bg-white"></div>
-        <h3>
-          <!-- {{ months[movieDets.release_date.split("-")[1] - 1]  }} -->
-          {{ months[dates[1] - 1] }}
-          {{ dates[0] }}
-        </h3>
-      </div>
-    </div>
-    <!-- Details side -->
-    <div class="">
-      <h1 class="uppercase text-4xl font-semibold text-white">
-        {{ movieDets.title }}
-      </h1>
-      <!--  -->
-      <div class="flex gap-3 text-[#868686]">
-        <p v-for="genre in movieDets.genres" :key="genre.id">
-          {{ genre.name }} /
-        </p>
-      </div>
-      <!--  -->
-      <div>
-        <h2>The Cast</h2>
-        <div class="flex gap-3">
-          <p v-for="cast in casts" :key="cast">
-            {{ cast }}
-          </p>
+ <div class="flex flex-col gap-10 lg:flex-row lg:h-screen p-12 image relative">
+      <div class="lg:w-2/5  h-full rounded-lg overflow-hidden">
+        <img class="h-full w-full r" :src="imagePath + movieDets.poster_path" alt="Movie Poster" />
+        <div
+          class="p-5 bg-[#49494a] text-white absolute top-20 left-[20px] flex flex-col justify-center items-center rounded-lg gap-3"
+        >
+          <h3 class="font-semibold text-2xl">
+            {{ dates[2] }}
+          </h3>
+          <div class="w-[20px] h-[2px] bg-white"></div>
+          <h3>
+            <!-- {{ months[movieDets.release_date.split("-")[1] - 1]  }} -->
+            {{ months[dates[1] - 1] }}
+            {{ dates[0] }}
+          </h3>
         </div>
       </div>
-      <!--  -->
-      <div>
-        <StarRate :rate="detsFromIMDB.imdbRating" />
-        {{ detsFromIMDB.imdbRating }}
+      <div class="lg:w-3/5  h-full flex gap-4 flex-col mt-8 md:mt-0">
+        <h1 class="uppercase text-4xl font-semibold text-white">
+          {{ movieDets.title }}
+        </h1>
+        <div class="flex  text-[#868686]">
+          <p v-for="genre in movieDets.genres" :key="genre.id" class="t text-sm">
+            {{ genre.name }}
+          </p>
+        </div>
+        <div class="text-white">
+          <h2 class="text-xl font-semibold">Casts</h2>
+          <div class="flex gap-2">
+            <p v-for="cast in casts" :key="cast">
+              {{ cast }}
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <StarRate :rate="detsFromIMDB.imdbRating" />
+          <p class="text-white">{{ detsFromIMDB.imdbRating }}</p>
+        </div>
+        <div class="text-white mt-4">
+          <h2 class="text-2xl font-bold">Movie OverView</h2>
+          <p>{{ movieDets.overview }}</p>
+        </div>
       </div>
-      <!--  -->
-      <div class="text-white mt-4">
-        <h2 class="text-2xl font-medium">Movie OverView</h2>
-        <p>{{ movieDets.overview }}</p>
-      </div>
-      <!--  -->
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -132,9 +125,14 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
 .image {
   background: linear-gradient(270deg, #000000 -2.92%, rgba(0, 0, 0, 0) 100%);
   background-color: #1e1e1e;
+}
+
+img{
+    width: 100%;
 }
 
 </style>
