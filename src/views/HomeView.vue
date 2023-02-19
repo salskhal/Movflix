@@ -22,7 +22,7 @@ const getData = async () => {
     const res = await data.json();
     // let popular.value = first 5 movies
     popular.value = res.results.slice(0, 5);
-    toUse.value = popular.value[0];
+
   
 
     console.log(popular.value);
@@ -50,14 +50,14 @@ onMounted(() => {
 
 <template>
   <div class="home">
-    <LandingCaro :data="toUse" />
-    <div class="popular px-10 lg:px-16 pt-24">
+    <LandingCaro :data="popular" />
+    <!-- <div class="popular px-10 lg:px-16 pt-24">
       <div class="flex items-center justify-between">
         <h1 class="text-white font-medium text-4xl mb-6">Popular</h1>
         <router-link to="/" class="text-orange-500">View more </router-link>
       </div>
       <RenderCards :data="popular" title="No movie found" />
-    </div>
+    </div> -->
     <div class="popular px-10 lg:px-16 py-24">
       <div class="flex items-center justify-between">
         <h1 class="text-white font-medium text-4xl mb-6">Top Rated</h1>

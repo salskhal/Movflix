@@ -2,39 +2,23 @@
   <section class="our-team">
     <div class="grid-container">
       <div class="team-description">
-        <h1 class="team-title">Our <span>Team</span></h1>
-        
+        <h1 class="team-title">Popular</h1>
       </div>
-      <figure class="team-member">
-        <img src="../assets/One-piece.png" alt="" />
-        <figcaption>
-          <h2 class="name">Team member</h2>
-        </figcaption>
-      </figure>
-      <figure class="team-member">
-        <img src="../assets/One-piece.png" alt="" />
-        <figcaption>
-          <h2 class="name">Team member</h2>
-        </figcaption>
-      </figure>
-      <figure class="team-member">
-        <img src="../assets/One-piece.png" alt="" />
-        <figcaption>
-          <h2 class="name">Team member</h2>
-        </figcaption>
-      </figure>
-      <figure class="team-member">
-        <img src="../assets/One-piece.png" alt="" />
-        <figcaption>
-          <h2 class="name">Team member</h2>
-        </figcaption>
-      </figure>
-      <figure class="team-member">
-        <img src="../assets/One-piece.png" alt="" />
-        <figcaption>
-          <h2 class="name">Team member</h2>
-        </figcaption>
-      </figure>
+      <router-link v-for="post in data" :key="post.id" class="team-member group cursor-pointer rounded-xl overflow-hidden" :to="{ name: 'Detailed', params: { id: post.id } }" :id="post.id">
+        <img :src="imagePath + post.poster_path" alt="">
+        <div
+          class="group-hover:flex flex-col  hidden absolute bottom-0 left-0 right-0 bg-[#10131f] m-2 p-4 rounded-md"
+        >
+          <p class="text-white text-base md:text-xl font-medium overflow-y-auto">{{ post.title }}</p>
+          <div class="mt-5 flex justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+
+              <p class="text-white text-xs md:text-sm">{{ post.overview.length > 20 ? post.overview.substring(0,50) + "....." : post.overview}}</p>
+
+            </div>
+          </div>
+        </div>
+      </router-link>
     </div>
   </section>
 </template>
@@ -42,10 +26,11 @@
 <script setup>
 import { ref } from "@vue/reactivity";
 
+
 const imagePath = ref("https://image.tmdb.org/t/p/w500");
 
 defineProps({
-  data: Object,
+  data: Array,
 });
 </script>
 
@@ -71,11 +56,11 @@ $fw-b: 900; */
 
 /* *, *::before, *::after { box-sizing: border-box; } */
 
-body {
+/* body {
   font-weight: 400;
   line-height: 1.6;
   font-family: "Raleway", sans-serif;
-}
+} */
 
 .grid-container {
   width: 95%;
@@ -112,7 +97,7 @@ body {
 .team-title {
   text-transform: uppercase;
   font-weight: 300;
-  font-size: 5rem;
+  font-size: 3rem;
   color: #f8f8f8;
   margin-top: 0;
   line-height: 1;
@@ -125,12 +110,12 @@ body {
 }
 .team-member figcaption {
   position: absolute;
-  top: 1em;
-  bottom: 1em;
-  right: 1em;
+  /* top: 1em; */
+  bottom: 0;
+  /* right: 1em; */
   left: 1em;
   background: rgba(#70a9a1, 0.8);
-  color: #0b2027;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,6 +134,7 @@ body {
 .team-member img {
   width: 100%;
   display: block;
+  opacity: 0.8;
 }
 .name {
   text-transform: uppercase;

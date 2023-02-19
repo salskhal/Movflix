@@ -4,10 +4,11 @@
       v-if="data"
       class="grid lg:grid-cols-5 sm:grid-cols-3  grid-cols-2 gap-3"
     >
-      <router-link to="/detailed"
+      <router-link :to="{ name: 'Detailed', params: { id: post.id } }"
         v-for="post in data"
         :key="post.id"
         class="rounded-xl group relative shadow-card hover:shadow-cardhover card cursor-pointer"
+        :id="post.id"
       >
         <img
           :src="imagePath + post.poster_path"
